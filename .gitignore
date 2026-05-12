@@ -1,0 +1,17 @@
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Python
+__pycache__/
+*.py[cod]
+
+# CTD data files — not committed; download locally using CTD_Data_Download.ipynb
+CTD Data/
+
+# Output images
+*.png
+*.pdf
+
+# macOS
+.DS_Store
