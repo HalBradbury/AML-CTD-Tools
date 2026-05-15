@@ -92,4 +92,5 @@ The notebooks expect cast files to be organised as follows (created automaticall
 - The AML-6 records dissolved oxygen in **µmol/L**. The notebooks use this unit by default; set `DO_UNITS = 'mL/L'` in the configuration cell to convert to the legacy mL/L unit.
 - TEOS-10 quantities (Absolute Salinity, Conservative Temperature, σ₀) are computed using the [`gsw`](https://teos-10.github.io/GSW-Python/) package.
 - On **macOS**, the download notebook uses `/usr/bin/expect` to drive `sftp` interactively. This is required because macOS Local Network privacy restrictions block Python's `socket` module and `nc` from reaching the instrument's local-network IP (172.18.x.x).
+- The **browser** you use to run JupyterLab must also have Local Network access enabled. On macOS, go to **System Settings → Privacy & Security → Local Network** and ensure your browser is toggled on. If the toggle is missing, open any notebook cell and run a command — macOS will prompt you to grant access.
 - On **Windows**, the download notebook uses `paramiko` for SFTP and `netsh` for WiFi management.
