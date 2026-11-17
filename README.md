@@ -47,7 +47,7 @@ The notebook produces:
 
 ### 3 · Export to CSV
 
-Open `CTD_Data_Extraction_Batch.ipynb` and run all cells to process every day folder in `CTD Data/` and write one CSV per day (`YYYY-MM-DD_extracted.csv`) into that folder. Set `BIN_DATA = True` to average each cast into `BIN_SIZE_M` depth bins instead of smoothing; the output is then `YYYY-MM-DD_extracted_binned0.5m.csv`, with an `n_samples` column giving the number of readings in each bin.
+Open `CTD_Data_Extraction_Batch.ipynb` and run all cells to process every day folder in `CTD Data/` and write one CSV per day (`YYYY-MM-DD_extracted.csv`) into that folder. Set `DATE_FILTER` to process only a month (`'2026-11'`), a day (`'2026-11-04'`) or a list of either; `None` processes everything. Set `BIN_DATA = True` to average each cast into `BIN_SIZE_M` depth bins instead of smoothing; the output is then `YYYY-MM-DD_extracted_binned0.5m.csv`, with an `n_samples` column giving the number of readings in each bin.
 
 ---
 
