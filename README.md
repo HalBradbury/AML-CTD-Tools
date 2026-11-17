@@ -12,7 +12,7 @@ Developed for use in **EOSC 473/573** (Methods in Oceanography, University of Br
 | [`CTD_Data_Download.ipynb`](CTD_Data_Download.ipynb) | Download raw cast files from the AML-6 over its onboard WiFi network |
 | [`CTD_Data_Extraction.ipynb`](CTD_Data_Extraction.ipynb) | Load, trim, and visualise casts — station map via **cartopy** |
 | [`CTD_Data_Extraction_mmap.ipynb`](CTD_Data_Extraction_mmap.ipynb) | Same as above with station map via **py_m_map** (a Python port of M-Map which produces excellent oceanographic maps) |
-| [`CTD_Data_Extraction_Batch.ipynb`](CTD_Data_Extraction_Batch.ipynb) | Batch-process all cast files and export one CSV per day |
+| [`CTD_Data_Extraction_Batch.ipynb`](CTD_Data_Extraction_Batch.ipynb) | Batch-process all cast files and export one CSV per day (optionally depth-binned) |
 
 ---
 
@@ -29,7 +29,12 @@ Open `CTD_Data_Download.ipynb`. Set `PLATFORM = 'mac'` or `PLATFORM = 'windows'`
 
 ### 2 · Process and visualise
 
-Open `CTD_Data_Extraction.ipynb` (or the `_mmap` variant). Set `DATE_PATTERNS` in the **USER CONFIGURATION** cell to match the date(s) of your casts, then run all cells (`Kernel → Restart & Run All`). The notebook produces:
+Open `CTD_Data_Extraction.ipynb` (or the `_mmap` variant). Set `DATE_PATTERNS` in the **USER CONFIGURATION** cell to match the date(s) of your casts, then run all cells (`Kernel → Restart & Run All`). Dates are zero-padded automatically, so `2026-11-4` is read as `2026-11-04`. Optional settings in the same cell:
+
+- `EXCLUDED_PROFILES` — casts to leave out of the map and plots
+- `BIN_DATA` / `BIN_SIZE_M` — average each cast into depth bins (default 0.5 m) before plotting
+
+The notebook produces:
 
 - Diagnostic trim plot (full record vs. downcast)
 - Station map overlaid on multibeam bathymetry
@@ -38,10 +43,11 @@ Open `CTD_Data_Extraction.ipynb` (or the `_mmap` variant). Set `DATE_PATTERNS` i
 - Dissolved oxygen concentration and percent saturation
 - Apparent Oxygen Utilization (AOU)
 - Temperature–Salinity (T-S) diagram with isopycnals
+- Depth-range summary for a chosen cast and depth window
 
-### 3 · Export to CSV (optional)
+### 3 · Export to CSV
 
-Open `CTD_Data_Extraction_Batch.ipynb` and run all cells to process every day folder in `CTD Data/` and write one CSV per day. Useful for downstream analysis in other tools.
+Open `CTD_Data_Extraction_Batch.ipynb` and run all cells to process every day folder in `CTD Data/` and write one CSV per day (`YYYY-MM-DD_extracted.csv`) into that folder. Set `BIN_DATA = True` to average each cast into `BIN_SIZE_M` depth bins instead of smoothing; the output is then `YYYY-MM-DD_extracted_binned0.5m.csv`, with an `n_samples` column giving the number of readings in each bin.
 
 ---
 
@@ -67,7 +73,7 @@ AML-CTD-Tools/
 ├── CTD_Data_Download.ipynb           # Cross-platform download
 ├── CTD_Data_Extraction.ipynb         # Analysis — cartopy maps
 ├── CTD_Data_Extraction_mmap.ipynb    # Analysis — py_m_map maps
-├── CTD_Data_Extraction_Batch.ipynb   # Batch CSV export
+├── CTD_Data_Extraction_Batch.ipynb   # Batch CSV export (optional depth binning)
 ├── barkley_sound_1_navd88_2016.nc    # Multibeam bathymetry (Barkley Sound, 2016)
 └── archive/                          # Earlier notebook versions (not for student use)
 ```
